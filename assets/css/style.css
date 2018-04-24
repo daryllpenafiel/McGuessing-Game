@@ -1,0 +1,34 @@
+body {
+    background-color: #dd1021;
+    margin: auto;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    height: 1000px;
+}
+
+h1 {
+    color: #ffc300;
+}
+
+p {
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 5px;
+    color: white;
+}
+
+#current-word {
+    font-size: 26px;
+    line-height: 150%;
+    letter-spacing: 7px;
+    color: #ffc300;
+    font-weight: bold;
+}
+
+#old-word {
+    font-size: 24px;
+    line-height: 150%;
+    letter-spacing: 6px;
+    color: #ffc300;
+    font-weight: bold;
+}

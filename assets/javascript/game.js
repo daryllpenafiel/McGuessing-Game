@@ -1,17 +1,38 @@
     //VARIABLES
    
-    var words=["mcmuffin","mcnuggets","mcgriddle","bigmac","filletofish"]
+    var words=["MCMUFFIN","MCNUGGETS","MCGRIDDLE","BIGMAC","FILETOFISH"]
     var wins = 0;
     var losses = 0;
-    var guesses = 9;
+    var guesses = 10;
     var remainingGuess = 10;
-    var guessedLetters = [];
+    var guessedLetters = [""];
     var word_;
     var letterToGuess;
     var userInput = "";
     var pcGuess;
+    var lastWord;
 
     //FUNCTIONS
+
+    //Reset
+    function reset() {
+        wait(200);
+        runPCGuess();
+        console.log("new word to guess: " + pcGuess);
+        setBlanks ();
+        remainingGuess = 10;
+        document.getElementById("used-letters").innerHTML = "Used Letters: ";
+        document.getElementById('remaining-guesses').innerHTML= "Remaining guesses: " + remainingGuess; 
+    };
+
+    //Wait
+    function wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+     }
 
     //PC guess
     function runPCGuess() {
@@ -23,6 +44,7 @@
 
     //Create Blanks for Word
     function setBlanks () {
+        guessedLetters = [];
         for (var i=0; i<pcGuess.length; i++) {
             guessedLetters[i] = "_";
         }
@@ -34,16 +56,22 @@
     
     setBlanks();
 
-    //Update Wins
+      //Update Wins
+
     function updateWins() {
         wins++;
+        document.getElementById("current-word").innerHTML = pcGuess;
         document.getElementById('wins').innerHTML = "Wins: " + wins;
+        document.getElementById('old-word').innerHTML = pcGuess;
+        reset();
     };
     
     //Update Losses
     function updateLosses() {
         losses++;
         document.getElementById('losses').innerHTML = "Losses: " + losses;
+        document.getElementById('old-word').innerHTML = "";
+        reset();
     };
     
     //Update Remaining Guesses
@@ -52,53 +80,22 @@
         document.getElementById('remaining-guesses').innerHTML = "Remaining Guesses: " + remainingGuess;
     };
 
-    //Reset
-    function reset() {
-        runPCGuess();
-        console.log("new word to guess: " + pcGuess);
-        setBlanks ();
-        remainingGuess = 9;
-        document.getElementById("used-letters").innerHTML = "Used Letters: ";
-        document.getElementById('remaining-guesses').innerHTML= "Remaining guesses: " + remainingGuess;
-    };
-
-
-    function input () {
+    function input() {
         document.onkeyup = function(event) {
         userInput = event.key;
         console.log(userInput);
         updateRemainingGuesses ();
         for (i=0; i<pcGuess.length; i++) {
-            if (userInput === pcGuess[i]) {
+            if (userInput == pcGuess[i]) {
                 guessedLetters[i] = userInput;
+                
             } document.getElementById("current-word").innerHTML = guessedLetters.join(" ");
         }
-            if (guessedLetters === pcGuess) {
+            if (!guessedLetters.includes("_")) {
                 updateWins();
-                reset();
             } else if (remainingGuess == 0) {
-            updateLosses ();
-            reset();
-        }
+            updateLosses();
+    }
     }};
 
     input();
-        /*
-        guessedLetters.push(userInput);
-        document.getElementById("letters").innerHTML = "Your Guesses so far: " + guessedLetters;
-            
-            if (remainingGuess !== 0) {
-                if (userInput == pcGuess) {
-                alert("Correct guess!");
-                updateWins();
-                reset();
-                } else {
-                updateRemainingGuesses();}
-            } else {
-                updateLosses();
-                reset();
-                alert("You lose. Next round!");
-            }
-    }
-};
-*/
