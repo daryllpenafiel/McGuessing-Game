@@ -2,26 +2,45 @@
 <html>
 
 <head>
-    <title>Guess that McDonald's Item!</title>
+    <title>McGuessing Game</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
 </head>
 
 <body>
-<div class="header title">    
+
+
+<div class="header title"> 
+    <img src="./assets/images/logo.png" height:"230" width="230">
     <h1>GUESS THAT FOOD ITEM!</h1>
+    <hr>
 </div>
 
-<img src="./assets/images/logo.png" height:"300" width="300">
+<br>
+<br>
+<br>
 
-    <p id="old-word"></p>
+<div class=row>
+
+<div class="col-md-6">
+<p id="old-word"></p>
+<img src="./assets/images/bag.png" height:"300" width="300" id="picture">
+</div>
+
+<div class="col-md-6 score">
+
     <p id="wins">Wins: </p>
     <p id="losses">Losses: </p>
     <p id="remaining-guesses">Remaining Guesses: </p>
-    <p id="used-letters">Used Letters: </p>
+    <p>Used Letters: </p>
+    <p id="used-letters"></p>
     <p> Current Word: </p>
-    <p id="current-word"> </p> 
+    <p id="current-word"> </p>
+</div>
+
+</div>
 
 </body>
 
