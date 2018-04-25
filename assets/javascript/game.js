@@ -1,6 +1,6 @@
     //VARIABLES
     var alphabet = ['A','B',"C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-    var words=["MCMUFFIN","MCNUGGETS","MCGRIDDLE","BIGMAC","FILETOFISH","MCFRIES"]
+    var words=["MCMUFFIN","MCNUGGETS","MCGRIDDLE","BIG MAC","FILET O FISH","MCFRIES"]
     var images=["./assets/images/mcmuffin.png","./assets/images/mcnuggets.png","./assets/images/mcgriddle.png","./assets/images/bigmac.png","./assets/images/filetofish.png","./assets/images/mcfries.png","./assets/images/loss3.png"]
     var wins = 0;
     var losses = 0;
@@ -61,7 +61,6 @@
         document.getElementById('picture').src=images[6]; 
     }
 
-
     //WAIT
     function wait(ms){
         var start = new Date().getTime();
@@ -83,8 +82,11 @@
     function setBlanks () {
         guessedLetters = [];
         for (var i=0; i<pcGuess.length; i++) {
+            if (pcGuess[i] == " ") {
+            guessedLetters[i] = "&nbsp";
+        }   else {
             guessedLetters[i] = "_";
-        }
+        }}
 
         word_ = guessedLetters.join(" ");        
         document.getElementById('current-word').innerHTML = word_;
