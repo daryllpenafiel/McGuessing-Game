@@ -1,12 +1,13 @@
     //VARIABLES
-   
+    var alphabet = ['A','B',"C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
     var words=["MCMUFFIN","MCNUGGETS","MCGRIDDLE","BIGMAC","FILETOFISH","MCFRIES"]
     var images=["./assets/images/mcmuffin.png","./assets/images/mcnuggets.png","./assets/images/mcgriddle.png","./assets/images/bigmac.png","./assets/images/filetofish.png","./assets/images/mcfries.png","./assets/images/loss3.png"]
     var wins = 0;
     var losses = 0;
     var guesses = 10;
-    var remainingGuess = 10;
+    var remainingGuess = 12;
     var guessedLetters = [""];
+    var usedLetters = [""];
     var word_;
     var letterToGuess;
     var userInput = "";
@@ -15,19 +16,32 @@
 
     //FUNCTIONS
 
-    //Reset
+    //RESET
 
     function reset() {
         wait(200);
         runPCGuess();
         console.log("new word to guess: " + pcGuess);
         setBlanks ();
-        remainingGuess = 10;
-        document.getElementById("used-letters").innerHTML = "Used Letters: ";
-        document.getElementById('remaining-guesses').innerHTML= "Remaining guesses: " + remainingGuess; 
+        remainingGuess = 12;
+        usedLetters=[""];
+        document.getElementById("used-letters").innerHTML = "<br>";
+        document.getElementById('remaining-guesses').innerHTML= "Remaining guesses: " + remainingGuess;
     };
 
-    //Update image
+    //UPDATE MUSIC
+
+    function updateMusicWin () { 
+        var snd = new Audio("./assets/music/win.mp3");
+        snd.play();
+    }
+
+    function updateMusicLoss () {
+        var snd = new Audio("./assets/music/loss.mp3");
+        snd.play();
+    }
+
+    //UPDATE IMAGE
     function updateImage() {
         if (pcGuess == words[0]) {
             document.getElementById('picture').src=images[0]; 
@@ -48,7 +62,7 @@
     }
 
 
-    //Wait
+    //WAIT
     function wait(ms){
         var start = new Date().getTime();
         var end = start;
@@ -57,7 +71,7 @@
        }
      }
 
-    //PC guess
+    //PC GUESS
     function runPCGuess() {
     pcGuess = words[Math.floor(Math.random() * words.length)];
     }
@@ -65,7 +79,7 @@
     runPCGuess();
     console.log(pcGuess);
 
-    //Create Blanks for Word
+    //CREATE BLANKS
     function setBlanks () {
         guessedLetters = [];
         for (var i=0; i<pcGuess.length; i++) {
@@ -86,6 +100,8 @@
         document.getElementById("current-word").innerHTML = pcGuess;
         document.getElementById('wins').innerHTML = "Wins: " + wins;
         document.getElementById('old-word').innerHTML = pcGuess;
+        document.getElementById('listen').innerHTML= "Enter next guess to begin next round...";
+        updateMusicWin();
         updateImage();
         reset();
     };
@@ -95,6 +111,8 @@
         losses++;
         document.getElementById('losses').innerHTML = "Losses: " + losses;
         document.getElementById('old-word').innerHTML = "";
+        document.getElementById('listen').innerHTML= "Enter next guess to begin next round...";
+        updateMusicLoss();
         sadImage();
         reset();
     };
@@ -103,12 +121,17 @@
     function updateRemainingGuesses () {
         remainingGuess--;
         document.getElementById('remaining-guesses').innerHTML = "Remaining Guesses: " + remainingGuess;
+        usedLetters.unshift(userInput);
+        document.getElementById("used-letters").innerHTML = usedLetters;
     };
 
     function input() {
         document.onkeyup = function(event) {
-        userInput = event.key;
+        userInput = event.key.toUpperCase();
         console.log(userInput);
+        if (alphabet.indexOf(userInput) >= 0 && usedLetters.indexOf(userInput) < 0) {
+        document.getElementById('used-letters').innerHTML= "";
+        document.getElementById('listen').innerHTML= "";
         updateRemainingGuesses ();
         for (i=0; i<pcGuess.length; i++) {
             if (userInput == pcGuess[i]) {
@@ -121,6 +144,6 @@
             } else if (remainingGuess == 0) {
             updateLosses();
     }
-    }};
+    }}};
 
     input();

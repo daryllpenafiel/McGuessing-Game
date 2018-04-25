@@ -39,3 +39,12 @@ p {
     height: 300px;
     width: 380px;
 }
+
+
+#used-letters {
+    font-size: 23px;
+    line-height: 150%;
+    letter-spacing: 5px;
+    color: #ffc300;
+    font-weight: bold;
+}
