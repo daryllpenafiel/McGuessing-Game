@@ -1,4 +1,5 @@
 MGuessing Game
+
 It's my take on "Hangman" with a theme focused on one of my favorite fast food chains.
 This is one of my first projects using Javascript.
 
